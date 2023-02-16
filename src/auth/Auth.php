@@ -2,15 +2,16 @@
 
 namespace App\auth;
 
-use App\ConnectionFactory;
+use App\factory\ConnectionFactory;
+use App\user\User;
 
 class Auth
 {
 
     public static function authenticate(string $email, string $password): ?User {
-        $pdo = ConnectionFactory::makeConnection();
+        $pdo = ConnectionFactory::getConnection();
         if (!filter_var($email, FILTER_SANITIZE_EMAIL)) return null;
-        $getPass = "select passwd, role , active from user where email = :email";
+        $getPass = "select passwd, role from User where email = :email";
         $req = $pdo->prepare($getPass);
         $req->bindParam(':email', $email);
         $req->execute();
@@ -18,50 +19,49 @@ class Auth
         while ($data = $req->fetch()) {
             $bdHash = $data['passwd'];
             $role = $data['role'];
-            $actif = $data['active'];
-            if (password_verify($password, $bdHash) && $actif == 1){
-                $user = new User($email, $bdHash, $role);
-                $user->setId();
-                $_SESSION['user'] = serialize($user);
-                return $user;
+            if (password_verify($password, $bdHash) == 1){
+                $User = new User($email, $bdHash, $role);
+                $User->setId();
+                $_SESSION['User'] = serialize($User);
+                return $User;
             }
         }
         return null;
     }
 
-    public static function register(string $email, string $password): bool {
-        $bd = ConnectionFactory::makeConnection();
-        $query = "select id from user where email = :email";
+    public static function register(string $email, string $password, string $nom, string $prenom, string $tel, string $adresse): bool {
+        $bd = ConnectionFactory::getConnection();
+        $query = "select idClient from User where email = :email";
         $get = $bd->prepare($query);
 
         if (filter_var($email, FILTER_SANITIZE_EMAIL)) {
-            $get->bindParam(':email', $email);
-            $get->execute();
-            if (!$get->fetch()) {
+            if (filter_var($nom,FILTER_SANITIZE_EMAIL )) {
+                if (filter_var($prenom, FILTER_SANITIZE_EMAIL)) {
+                    if (filter_var($tel, FILTER_SANITIZE_EMAIL)) {
+                        if (filter_var($adresse, FILTER_SANITIZE_EMAIL)) {
+                            $get->bindParam(':email', $email);
+                            $get->execute();
+                            if (!$get->fetch()) {
 
-                // Token d'activation de compte
-                $active = 0;
-                $activateToken = bin2hex(random_bytes(64));
-                $renewToken = bin2hex(random_bytes(64));
-                $activationExpires = date('Y-m-d H:i:s',time() + 60*60);
-                $activationRenew = date('Y-m-d H:i:s',time() + 60*15);
+                                $newPass = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+                                $insert = "insert into User(email, passwd, nom, prenom, adresse, tel) 
+                           values(:email, :password, :nom, :prenom, :adresse, :tel)";
+                                $do = $bd->prepare($insert);
 
-                $newPass = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
-                $insert = "insert into user(email, passwd, active, activation_token, activation_expires, renew_token, renew_expires) 
-                           values(:email, :password, :active, :actiT, :actiE, :renewT, :renewE)";
-                $do = $bd->prepare($insert);
+                                $do->bindParam(':email', $email);
+                                $do->bindParam(':password', $newPass);
+                                $do->bindParam(':nom', $nom);
+                                $do->bindParam(':prenom', $prenom);
+                                $do->bindParam(':adresse', $adresse);
+                                $do->bindParam(':tel', $tel);
 
-                $do->bindParam(':email', $email);
-                $do->bindParam(':password', $newPass);
-                $do->bindParam(':active', $active);
-                $do->bindParam(':actiT', $activateToken);
-                $do->bindParam(':actiE', $activationExpires);
-                $do->bindParam(':renewT', $renewToken);
-                $do->bindParam(':renewE', $activationRenew);
+                                $do->execute();
 
-                $do->execute();
-
-                return true;
+                                return true;
+                            }
+                        }
+                    }
+                }
             }
         }
         return false;
