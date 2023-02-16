@@ -55,7 +55,7 @@ class Dispatcher
     <link rel='stylesheet' href='style.css'/>
     <meta charset='UTF-8'>
     <title>CrazyCharlyDay</title>
-    <style src="script"
+    <style src="script"></style>
 </head>
 <body>
 
