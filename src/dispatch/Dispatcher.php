@@ -66,7 +66,7 @@ class Dispatcher
         
         <li><a href='?'>Accueil</a></li>
         <li><a href='?action=catalogue'>Catalogue</a></li>
-        <li><a href='?'>Mon Panier</a></li>
+        <li><a href='?action=panier'>Mon Panier</a></li>
         <li><a href='?'>Mon Compte</a> </li>  
         </ul> 
     </nav>
