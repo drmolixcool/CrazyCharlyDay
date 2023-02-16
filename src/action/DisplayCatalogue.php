@@ -11,16 +11,36 @@ class DisplayCatalogue extends Action
         $html = "";
 
         if (($db = ConnectionFactory::getConnection()) != null) {
-            $query = "SELECT id, nom, prix, description FROM produit";
+            $query = "SELECT ceil(count(*)/5) FROM produit";
+            $req = $db->prepare($query);
+            $req->execute();
+            $nbPage = $req->fetchColumn();
+
+
+
+            $query = "SELECT id,nom,prix,lieu,img FROM produit";
 
             $req = $db->prepare($query);
             $req->execute();
+            $html .= <<<END
+            <ul class="list-cat">
+END;
 
             while ($data = $req->fetch()) {
-                $html = $html . "<img class='img-serie' src='" . "Images/" . $data["id"] . "' width='400' height='400'>" .
-                    $data["nom"] . $data["prix"] . $data["description"];
+                $html .= <<<END
+                    <li class="cat">
+                        <a href="index.php?action=displayProduct&id={$data['id']}">
+                        <h3>{$data['nom']}</h3>
+                            <img src="{$data['img']}" alt="{$data['nom']}">
+                            <p>{$data['prix']}€</p>
+                            <p>{$data['lieu']}</p>
+                        </a>
+                    </li>  
+END;
             }
-
+            $html .= <<<END
+            </ul>
+END;
         }
         return $html;
     }

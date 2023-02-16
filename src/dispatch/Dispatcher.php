@@ -36,10 +36,9 @@ class Dispatcher
                 //TODO
                 break;
             default:
-                //TODO
+                break;
         }
         $this->renderPage($html);
-
     }
 
     private function renderPage(string $html): void
@@ -55,7 +54,7 @@ class Dispatcher
 
     <header>
         <a href=''>Accueil</a>
-        <a href=''>Catalogue</a>
+        <a href='?action=catalogue'>Catalogue</a>
         <a href=''>Mon Panier</a>
         <a href=''>Mon Compte</a>
 
