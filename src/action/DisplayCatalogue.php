@@ -9,46 +9,42 @@ class DisplayCatalogue extends Action
     public function execute(): string
     {
         $html = <<<EOF
+<form action='?action=catalogue' method='post'>
 <div class='search'>
-<form action='?action=catalogue' method='post' id='searchbar'>
     <input type='text' name='search' placeholder='Rechercher' id='searchbar-input'>
     <input id='button' type='submit' value='Rechercher'>
-</form>
- 
 </div>
                 
 <div id='filter'>
-<form method='POST' action='?action=catalogue'>
 <label for='ville'>Filtrer par ville</label>
-<br> <select name='ville'>
-    <option><button value ='Chauny'>Chauny</button></option>
-    <option><button value ='Les Pennes-Mirabeau'>Les Pennes-Mirabeau</button></option>
-    <option><button value='Leyr'>Leyr</button></option>
-    <option><button value='Lucey'>Lucey</button></option>
-    <option><button value='Nancy'>Nancy</button></option>
-    <option><button value='Pont à Mousson'>Pont à Mousson</button></option>
-    <option><button value='Santeny'>Santeny</button></option>
-    <option><button value='Sarralbe'>Sarralbe</button></option>
-    <option><button value='Villeurbanne'>Villeurbanne</a></option>
-    <option><button value='Wiwersheim'>Wiwersheim</button></option>
+<br>
+<select name='ville' id='ville-select' style='text-align: center'>
+    <option value=''>--- Ville ---</option>
+    <option value='Chauny'>Chauny</option>
+    <option value='Les Pennes-Mirabeau'>Les Pennes-Mirabeau</option>
+    <option value='Leyr'>Leyr</option>
+    <option value='Lucey'>Lucey</option>
+    <option value='Nancy'>Nancy</option>
+    <option value='Pont à Mousson'>Pont à Mousson</option>
+    <option value='Santeny'>Santeny</option>
+    <option value='Sarralbe'>Sarralbe</option>
+    <option value='Villeurbanne'>Villeurbanne</option>
+    <option value='Wiwersheim'>Wiwersheim</option>
 </select>
-             
-<br><button type='submit'>Filtrer par ville</button>
-</form>
 
-
-<form method='POST' action='?action=catalogue'>
 <label for='categorie'>Filtrer par catégorie</label>
-<br><select name='categorie'>
-    <option><button value ='Épicerie'>Épicerie</button></option>
-    <option><button value ='Boissons'>Boissons</button></option>
-    <option><button value='Droguerie'>Droguerie</button></option>
-    <option><button value='Cosmétiques'>Cosmétiques</button></option>
-    <option><button value='Produits frais'>Produits frais</button></option>
+<br>
+<select name='categorie' id='categorie-select'>
+    <option value=''>--- Catégorie ---</option>
+    <option value='Épicerie'>Épicerie</option>
+    <option value='Boissons'>Boissons</option>
+    <option value='Droguerie'>Droguerie</option>
+    <option value='Cosmétiques'>Cosmétiques</option>
+    <option value='Produits frais'>Produits frais</option>
 </select>
-<br><button type='submit'>Filtrer par catégorie</button>
-</form>
+<br>
 </div>             
+</form>
 EOF;
 
 
