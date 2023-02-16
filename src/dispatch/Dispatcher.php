@@ -37,6 +37,9 @@ class Dispatcher
             case 'compte':
                 //TODO
                 break;
+            case '':
+
+                break;
             default:
                 break;
         }
@@ -66,7 +69,6 @@ class Dispatcher
     
     $html   
 
-<img src='images/1.jpg' alt='image1'>
 
 
 </body>
