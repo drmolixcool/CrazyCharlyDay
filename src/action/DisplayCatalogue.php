@@ -8,10 +8,14 @@ class DisplayCatalogue extends Action
 
     public function execute(): string
     {
-        $html = " <form action='?action=catalogue' method='post' id='searchbar'>
+        $html = " 
+ <div class='catalogue-rechercher'>
+ <form action='?action=catalogue' method='post' id='searchbar'>
                     <input type='text' name='search' placeholder='Rechercher' id='searchbar-input'>
                     <input type='submit' value='Rechercher'>
                   </form>
+ 
+</div>
                 
                 <div id='filter'>
                 <form method='POST' action='?action=catalogue'>
@@ -28,6 +32,7 @@ class DisplayCatalogue extends Action
                     <option><button value='Villeurbanne'>Villeurbanne</a></option>
                     <option><button value='Wiwersheim'>Wiwersheim</button></option>
                 </select>
+             
                 <br><button type='submit'>Filtrer par ville</button>
                 </form>
                 
@@ -102,8 +107,9 @@ END;
                 $html .= <<<END
                     <li class="cat">
                         <a href="index.php?action=produit&id={$data['id']}">
+                         <img src="{$data['img']}" alt="{$data['nom']}">
                         <h3>{$data['nom']}</h3>
-                            <img src="{$data['img']}" alt="{$data['nom']}">
+                           
                             <p>{$data['prix']}€</p>
                             <p>{$data['lieu']}</p>
                         </a>

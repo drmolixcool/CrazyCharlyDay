@@ -18,13 +18,18 @@ class DisplayProduits extends Action
             $data = $req->fetch();
             $html .= <<<END
             <div class="produit">
-                    <h1>{$data['nom']}</h1>
-                    <img src="{$data['img']}" alt="{$data['nom']}">
+                    
+                   <div class='titre'  <h1>{$data['nom']}</h1></div>
+                    
+                   <img src="{$data['img']}" alt="{$data['nom']}">
+                    
+                    <div class='description'>
                     <p>{$data['description']}</p>
                     <p>{$data['detail']}</p>
                     <p>{$data['poids']}</p>
                     <p>{$data['prix']}€</p>
                     <p>{$data['lieu']}</p>
+                    </div>
                  
 </div>
 END;
