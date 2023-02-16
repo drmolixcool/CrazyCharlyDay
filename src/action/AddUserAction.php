@@ -13,7 +13,7 @@ class AddUserAction
         if($_SERVER['REQUEST_METHOD']==="GET"){
 
             $html = <<<EOF
-                <form id="form" method="post" action="?action=add-user" >
+                <form id="form" method="post" action="?action=inscription" >
                     <label for="form_email">Email</label>
                     <input type="email" id="form_email" name="email" placeholder="<email>" > <br>
                     <br><label for="form_mdp">Mot de passe</label>

@@ -39,25 +39,13 @@ class Auth
             $get->execute();
             if (!$get->fetch()) {
 
-                // Token d'activation de compte
-                $active = 0;
-                $activateToken = bin2hex(random_bytes(64));
-                $renewToken = bin2hex(random_bytes(64));
-                $activationExpires = date('Y-m-d H:i:s',time() + 60*60);
-                $activationRenew = date('Y-m-d H:i:s',time() + 60*15);
-
                 $newPass = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
-                $insert = "insert into user(email, passwd, active, activation_token, activation_expires, renew_token, renew_expires) 
-                           values(:email, :password, :active, :actiT, :actiE, :renewT, :renewE)";
+                $insert = "insert into user(email, passwd) 
+                           values(:email, :password)";
                 $do = $bd->prepare($insert);
 
                 $do->bindParam(':email', $email);
                 $do->bindParam(':password', $newPass);
-                $do->bindParam(':active', $active);
-                $do->bindParam(':actiT', $activateToken);
-                $do->bindParam(':actiE', $activationExpires);
-                $do->bindParam(':renewT', $renewToken);
-                $do->bindParam(':renewE', $activationRenew);
 
                 $do->execute();
 
