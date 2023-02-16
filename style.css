@@ -3,5 +3,26 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 -10px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aquamarine;
+    color: #fff;
+    padding: 20px;
+}
+
+body{
+    align-items: center;
 
 }
+
+footer {
+    background-color: aquamarine;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
