@@ -7,6 +7,9 @@ namespace App\dispatch;
 
 
 use App\action\DisplayCatalogue;
+use App\action\DisplayProduits;
+use App\action\SigninAction;
+
 
 class Dispatcher
 {
@@ -22,8 +25,9 @@ class Dispatcher
     {
         $html = '';
         switch($this->action) {
-            case 'home':
-                //TODO
+            case 'produit':
+                $act = new DisplayProduits();
+                $html = $act->execute();
                 break;
             case 'catalogue':
                 $act = new DisplayCatalogue();
@@ -32,9 +36,11 @@ class Dispatcher
             case 'panier':
                 //TODO
                 break;
-            case 'compte':
-                //TODO
+            case 'signin':
+                $act = new SigninAction();
+                $html = $act->execute();
                 break;
+            case 'inscription':
             default:
                 break;
         }
