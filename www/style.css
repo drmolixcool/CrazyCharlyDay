@@ -178,7 +178,17 @@ footer a{
     text-decoration: underline;
 }
 
+.search input[type=text]{
+    width:300px;
+    height:25px;
+    border-radius:25px;
+    border: none;
+}
 
+.search{
+    float:left;
+    margin:7px;
+}
 
 
 .text-center{
@@ -189,6 +199,7 @@ footer a{
     background: rgb(13,77,59);
     color : white;
 }
+
 
 
 

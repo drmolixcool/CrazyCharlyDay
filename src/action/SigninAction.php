@@ -28,6 +28,7 @@ class SigninAction extends Action
             $user = Auth::authenticate($email, $passwd);
             if ($user != null) {
                 $html = "<script>document.location.href='index.php'</script>";
+                $_SESSION['user'] = serialize($user);
             } else {
                 $html = "<div class='text-center text-red-600'>
                 <p>Votre email ou mot de passe est incorrect</p><br>

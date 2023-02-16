@@ -9,10 +9,10 @@ class DisplayCatalogue extends Action
     public function execute(): string
     {
         $html = " 
- <div class='catalogue-rechercher'>
+ <div class='search'>
  <form action='?action=catalogue' method='post' id='searchbar'>
                     <input type='text' name='search' placeholder='Rechercher' id='searchbar-input'>
-                    <input type='submit' value='Rechercher'>
+                    <input id='button' type='submit' value='Rechercher'>
                   </form>
  
 </div>
@@ -35,7 +35,6 @@ class DisplayCatalogue extends Action
              
                 <br><button type='submit'>Filtrer par ville</button>
                 </form>
-                
                 
              
                 <form method='POST' action='?action=catalogue'>
