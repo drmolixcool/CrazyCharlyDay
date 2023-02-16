@@ -1,4 +1,3 @@
 .idea/
 dbconfig.ini
 vendor/
-composer.lock
