@@ -22,9 +22,7 @@ class Dispatcher
 
     }
 
-
-
-    private function render(string $template): void
+    private function renderPage(string $html): void
     {
 
     }
