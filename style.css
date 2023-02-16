@@ -19,6 +19,10 @@ body{
 
 }
 
+#searchbar{
+    margin: 20px;
+}
+
 footer {
     background-color: aquamarine;
     color: #fff;
