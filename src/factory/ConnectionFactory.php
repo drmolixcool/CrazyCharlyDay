@@ -2,6 +2,10 @@
 
 namespace App\factory;
 
+use PDO;
+use PDOException;
+use App\exception\DatabaseConnectionException;
+
 class ConnectionFactory
 {
     public static array $config = [];
@@ -17,7 +21,7 @@ class ConnectionFactory
         if (is_null(self::$context)) {
             try {
                 self::$context = new PDO(
-                    self::$config['driver'] . ':host=' . self::$config['host'] . ';dbname=' . self::$config['database'],
+                    self::$config['driver'] . ':host=' . self::$config['host'] . ':' . self::$config['port'] . ';dbname=' . self::$config['database'],
                     self::$config['username'],
                     self::$config['password']
                 );

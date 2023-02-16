@@ -6,6 +6,8 @@ namespace App\dispatch;
 
 
 
+use App\action\DisplayCatalogue;
+
 class Dispatcher
 {
     private ?string $action = null;
@@ -18,7 +20,25 @@ class Dispatcher
 
     public function run(): void
     {
-
+        $html = '';
+        switch($this->action) {
+            case 'home':
+                //TODO
+                break;
+            case 'catalogue':
+                $act = new DisplayCatalogue();
+                $html = $act->execute();
+                break;
+            case 'panier':
+                //TODO
+                break;
+            case 'compte':
+                //TODO
+                break;
+            default:
+                //TODO
+        }
+        $this->renderPage($html);
 
     }
 
@@ -40,6 +60,8 @@ class Dispatcher
         <a href=''>Mon Compte</a>
 
     </header>
+    
+    $html   
 
 <img src='Images/1.jpg' alt='image1'>
 
