@@ -19,10 +19,12 @@ echo
 
 <img src='Images/1.jpg' alt='image1'>
 
-    <footer>
-        <a href=''>Mentions légales</a>
-        <a href=''>Nous contacter</a>
-    </footer>
 
 </body>
+
+<footer class='fixed bottom-0 h-10 bg-black text-center'>
+        <a href=''>Mentions légales</a>
+        <a href=''>Nous contacter</a>
+</footer>
+
 </html>" ;
