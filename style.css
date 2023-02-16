@@ -30,3 +30,11 @@ footer {
     text-align: center;
 }
 
+/* Make filterVille and filterCategorie lined with a space between */
+#filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px;
+}
+
