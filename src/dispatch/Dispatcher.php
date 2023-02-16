@@ -7,6 +7,7 @@ namespace App\dispatch;
 
 
 use App\action\DisplayCatalogue;
+use App\action\DisplayProduits;
 
 class Dispatcher
 {
@@ -22,8 +23,9 @@ class Dispatcher
     {
         $html = '';
         switch($this->action) {
-            case 'home':
-                //TODO
+            case 'produit':
+                $act = new DisplayProduits();
+                $html = $act->execute();
                 break;
             case 'catalogue':
                 $act = new DisplayCatalogue();
@@ -49,6 +51,7 @@ class Dispatcher
 <head>
     <link rel='stylesheet' href='style.css' >
     <meta charset='UTF-8'>
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.3.1/dist/leaflet.css' integrity='sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==' crossorigin='' />
     <title>CrazyCharlyDay</title>
 </head>
 <body>
