@@ -55,15 +55,14 @@ class Dispatcher
 
     private function renderPage(string $html): void
     {
-        echo
-        <<<EOF
+        echo <<<EOF
 <!DOCTYPE html>
 <html lang='fr'>
 <head>
-    <link rel='stylesheet' href='style.css'/>
+    <link rel='stylesheet' href='/style.css'>
     <meta charset='UTF-8'>
     <title>CrazyCharlyDay</title>
-    <style src="script"></style>
+    <script src="/script.js"></script>
 </head>
 <body>
 
@@ -93,6 +92,4 @@ class Dispatcher
 </html>
 EOF;
     }
-
-
 }

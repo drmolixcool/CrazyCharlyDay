@@ -46,6 +46,7 @@ class AddUserAction
                          <p >Inscription réussie</p>
                          <a href='index.php'>Accueil</a>
                          </div>";
+
             }
         }
         return $html;
