@@ -8,6 +8,7 @@ namespace App\dispatch;
 
 use App\action\DisplayCatalogue;
 use App\action\DisplayCompte;
+use App\action\DisplayPanier;
 use App\action\DisplayProduits;
 use App\action\SigninAction;
 
@@ -39,6 +40,8 @@ class Dispatcher
                 $act->execute();
                 break;
             case 'panier':
+                $act = new DisplayPanier();
+                $html = $act->execute();
                 break;
 
         }
