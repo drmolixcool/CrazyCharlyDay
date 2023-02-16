@@ -18,10 +18,18 @@ class DisplayCatalogue extends Action
         $html = "";
 
         if (($db = ConnectionFactory::makeConnection()) != null) {
-            $quere = "SELECT nom, prix, description FROM produit";
+            $query = "SELECT nom, prix, description FROM produit";
 
+            $req = $db->prepare($query);
+            $req->execute();
+
+            while ($data = $req->fetch()) {
+                $html = $html . $data["nom"] . $data["prix"] . $data["description"];
+            }
 
         }
+
+        return $html;
 
     }
 }
