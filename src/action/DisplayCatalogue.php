@@ -61,7 +61,14 @@ class DisplayCatalogue extends Action
             if (isset($_POST['search'])) {
                 $recherche = $_POST['search'];
                 $recherche = strtolower($recherche);
-                $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id WHERE nom LIKE '%$recherche%' and lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                $nbElem = $db->prepare("select count(*) from produit where nom LIKE '%$recherche%'");
+                $nbElem->execute();
+                $nbElem = $nbElem->fetchColumn();
+                if ($nbElem > 0) {
+                    $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id WHERE produit.nom LIKE '%$recherche%' and lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                } else {
+                    $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                }
             } else {
                 $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
             }
@@ -89,6 +96,10 @@ END;
             $html .= <<<END
             </ul>
 END;
+        }
+
+        for ($i = 1; $i <= $nbPage; $i++) {
+            $html .= "<a href='?action=catalogue&page=$i'>$i</a>";
         }
         return $html;
     }
