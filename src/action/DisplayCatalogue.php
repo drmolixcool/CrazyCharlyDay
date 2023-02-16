@@ -39,7 +39,7 @@ END;
             while ($data = $req->fetch()) {
                 $html .= <<<END
                     <li class="cat">
-                        <a href="index.php?action=displayProduct&id={$data['id']}">
+                        <a href="index.php?action=produit&id={$data['id']}">
                         <h3>{$data['nom']}</h3>
                             <img src="{$data['img']}" alt="{$data['nom']}">
                             <p>{$data['prix']}€</p>
