@@ -8,6 +8,8 @@ namespace App\dispatch;
 
 use App\action\DisplayCatalogue;
 use App\action\DisplayProduits;
+use App\action\SigninAction;
+
 
 class Dispatcher
 {
@@ -34,12 +36,11 @@ class Dispatcher
             case 'panier':
                 //TODO
                 break;
-            case 'compte':
-                //TODO
+            case 'signin':
+                $act = new SigninAction();
+                $html = $act->execute();
                 break;
-            case '':
-
-                break;
+            case 'inscription':
             default:
                 break;
         }
@@ -53,7 +54,7 @@ class Dispatcher
 <html lang='fr'>
 <head>
     <link rel='stylesheet' href='style.css' >
-    <meta charset='UTF-8'>   
+    <meta charset='UTF-8'>
     <title>CrazyCharlyDay</title>
 </head>
 <body>
@@ -62,7 +63,8 @@ class Dispatcher
         <a href='?'>Accueil</a>
         <a href='?action=catalogue'>Catalogue</a>
         <a href='?'>Mon Panier</a>
-        <a href='?'>Mon Compte</a>
+        <a href='?action=signin'>Connexion</a>
+        <a href='?'>Inscription</a>
 
     </header>
     
