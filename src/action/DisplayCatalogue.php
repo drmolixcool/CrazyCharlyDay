@@ -9,7 +9,7 @@ class DisplayCatalogue extends Action
     public function execute(): string
     {
         $html = " <form action='?action=catalogue' method='post' id='searchbar'>
-                    <input type='text' name='search' placeholder='Rechercher'>
+                    <input type='text' name='search' placeholder='Rechercher' id='searchbar-input'>
                     <input type='submit' value='Rechercher'>
                   </form>
                 
@@ -78,7 +78,7 @@ class DisplayCatalogue extends Action
             $req->execute();
 
             $html .= <<<END
-            <ul class="list-cat">
+            <ul class="list-cat" id="catalogue">
 END;
 
             while ($data = $req->fetch()) {
