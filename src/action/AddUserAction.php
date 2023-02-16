@@ -21,7 +21,7 @@ class AddUserAction
                     <br><label for="form_confirm">Confirmation du mot de passe</label>
                     <input type="password" id="form_confirm" name="confirm" placeholder="<mot de passe>" >
                     <br><button type="submit" >S'inscrire</button>
-                    <a href='Index.php' >Retour</a>
+                    <a href='index.php' >Retour</a>
             </form>
             
             EOF;
@@ -50,13 +50,13 @@ class AddUserAction
                 }else{
                     $html = "<div >
                             <p>Votre inscription a échoué, veuillez réessayer</p>
-                            <a href='Index.php' >Retour</a>
+                            <a href='index.php' >Retour</a>
                             </div>";
                 }
             }else{
                 $html = "<div >
                          <p >Vos deux mots de passe ne correspondent pas, veuillez réessayer</p>
-                         <a href='Index.php'>Retour</a>
+                         <a href='index.php'>Retour</a>
                          </div>";
             }
         }

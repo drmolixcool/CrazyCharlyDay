@@ -13,11 +13,10 @@ class SigninAction extends Action
             $html = "
                 <div class='text-center'>
                 <form method='post'>
-                    <label>Identifiant : </label><input type='email' name='email' placeholder='toto@gmail.com' >
-                    <label>Mot de passe : </label><input type='password' name='password' placeholder='mot de passe' >
+                    <label>Identifiant : </label><input type='email' name='email' placeholder='toto@gmail.com' > <br> <br>
+                    <label>Mot de passe : </label><input type='password' name='password' placeholder='mot de passe' > <br> <br>
                     <button type='submit' >Valider</button>
                 </form>
-                <br><a href='index.php' >Accueil</a>
                 </div>";
         }
         elseif ($this->httpMethod === "POST") {

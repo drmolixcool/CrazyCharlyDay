@@ -36,7 +36,7 @@ class Dispatcher
                 break;
             case 'compte':
                 $act = new DisplayCompte();
-                $act->execute();
+                $html = $act->execute();
                 break;
             case 'panier':
                 break;
