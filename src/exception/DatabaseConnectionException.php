@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Application\exception\datalayer;
+namespace App\exception;
 
 use Exception;
 use Throwable;

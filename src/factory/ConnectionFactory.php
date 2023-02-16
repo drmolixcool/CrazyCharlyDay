@@ -1,5 +1,7 @@
 <?php
 
+namespace App\factory;
+
 class ConnectionFactory
 {
     public static array $config = [];

@@ -1,12 +1,24 @@
 <?php
-
 use App\factory\ConnectionFactory;
 use App\dispatch\Dispatcher;
+use App\exception\DatabaseConnectionException;
+
+session_start();
 
 require_once 'vendor/autoload.php';
 
-session_start();
-ConnectionFactory::setConfig("dbconfig.ini");
+ConnectionFactory::setConfig('dbconfig.ini');
 
-$dispatcher = new Dispatcher();
-$dispatcher->run();
+$action = $_GET['action'] ?? '';
+
+$dispatcher = new Dispatcher($action);
+
+try {
+    $dispatcher->run();
+} catch (DatabaseConnectionException $exception) {
+    echo $exception->getMessage();
+}
+
+
+
+
