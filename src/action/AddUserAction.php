@@ -39,12 +39,12 @@ class AddUserAction
 
             if($_POST['password']===$_POST['confirm']){
 
-                $res = Auth::register(filter_var($_POST['email'],FILTER_SANITIZE_EMAIL),$_POST['password']);
+                $res = Auth::register(filter_var($_POST['email'],FILTER_SANITIZE_EMAIL),$_POST['password'],$_POST['nom'], $_POST['prenom'], $_POST['adresse'], $_POST['telephone'] );
                 if($res===true){
 
                     $mail = filter_var($_POST['email']);
 
-                    $db = ConnectionFactory::makeConnection();
+                    $db = ConnectionFactory::getConnection();
                     $query = "SELECT activation_token FROM user WHERE email=:mail";
                     $stmt = $db->prepare($query);
                     $stmt->bindParam("mail", $mail);
