@@ -75,9 +75,6 @@ class Dispatcher
     
     $html   
 
-<img src='images/1.jpg' alt='image1'>
-
-
 </body>
 
 <footer class='fixed bottom-0 h-10 bg-black text-center'>
