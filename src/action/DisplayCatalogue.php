@@ -161,9 +161,6 @@ END;
         }
 
 
-            for ($i = 1; $i <= $nbPage; $i++) {
-                $html .= "<a href='?action=catalogue&page=$i'>$i</a>";
-            }
             if (isset($_POST['article'])) {
                 $id = $_POST['article'];
                 $qt = $_POST['qt'];
@@ -182,7 +179,6 @@ END;
                 $req->execute();
                 }
 
-            }
         return $html;
     }
 }
