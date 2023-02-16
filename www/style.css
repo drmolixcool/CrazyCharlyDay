@@ -97,15 +97,21 @@ footer a{
     margin: 0 10px;
 }
 
-
-
-
-
-/* Make filterVille and filterCategorie lined with a space between */
 #filter {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 20px;
+}
+
+#page {
+    padding: 10px;
+}
+
+#pagination {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: blue;
+    text-decoration: underline;
 }
 

@@ -51,26 +51,43 @@ class DisplayCatalogue extends Action
 
 
         if (($db = ConnectionFactory::getConnection()) != null) {
-            $query = "SELECT ceil(count(*)/5) FROM produit";
-            $req = $db->prepare($query);
-            $req->execute();
-            $nbPage = $req->fetchColumn();
-            $ville = $_POST['ville'] ?? '';
-            $categorie = $_POST['categorie'] ?? '';
+            $_SESSION['categorie'] = $_POST['categorie'];
 
-            if (isset($_POST['search'])) {
-                $recherche = $_POST['search'];
-                $recherche = strtolower($recherche);
+            if (isset($_GET['page']) && $_GET['page'] != 1) $page = ($_GET['page']-1)*5 ?? 0;
+            else $page = 0;
+            if (isset($_POST['search'])) $_SESSION['search'] = $_POST['search'];
+            if (isset($_POST['ville'])) $_SESSION['ville'] = $_POST['ville'];
+            if (isset($_POST['categorie'])) $_SESSION['categorie'] = $_POST['categorie'];
+
+            $ville = $_SESSION['ville'] ?? '';
+            $categorie = $_SESSION['categorie'];
+
+            if (isset($_SESSION['search'])) {
+                $recherche = $_SESSION['search'];
                 $nbElem = $db->prepare("select count(*) from produit where nom LIKE '%$recherche%'");
                 $nbElem->execute();
                 $nbElem = $nbElem->fetchColumn();
+
                 if ($nbElem > 0) {
-                    $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id WHERE produit.nom LIKE '%$recherche%' and lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                    $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id WHERE produit.nom LIKE '%$recherche%' and lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%' limit $page,5";
+                    $queryCount = "SELECT count(*) FROM produit inner join categorie on produit.categorie = categorie.id WHERE produit.nom LIKE '%$recherche%' and lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                    $req = $db->prepare($queryCount);
+                    $req->execute();
+                    $nbPage = ceil($req->fetchColumn()/5);
+
                 } else {
-                    $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                    $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%' limit $page,5";
+                    $queryCount = "SELECT count(*) FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                    $req = $db->prepare($queryCount);
+                    $req->execute();
+                    $nbPage = ceil($req->fetchColumn()/5);
                 }
             } else {
-                $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                $query = "SELECT produit.id,produit.nom,prix,lieu,img FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%' limit $page,5";
+                $queryCount = "SELECT count(*) FROM produit inner join categorie on produit.categorie = categorie.id where lieu LIKE '%$ville%' and categorie.nom LIKE '%$categorie%'";
+                $req = $db->prepare($queryCount);
+                $req->execute();
+                $nbPage = ceil($req->fetchColumn()/5);
             }
 
 
@@ -95,12 +112,14 @@ END;
             }
             $html .= <<<END
             </ul>
+            <div id="pagination">
 END;
+            for ($i = 1; $i <= $nbPage; $i++) {
+                $html .= "<a id='page' href='?action=catalogue&page=$i'>$i</a>";
+            }
+            $html .= "</div>";
         }
 
-        for ($i = 1; $i <= $nbPage; $i++) {
-            $html .= "<a href='?action=catalogue&page=$i'>$i</a>";
-        }
         return $html;
     }
 }
