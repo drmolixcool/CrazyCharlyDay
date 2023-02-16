@@ -7,6 +7,10 @@ namespace App\dispatch;
 
 
 use App\action\DisplayCatalogue;
+use App\action\DisplayCompte;
+use App\action\DisplayProduits;
+use App\action\SigninAction;
+
 
 class Dispatcher
 {
@@ -22,21 +26,21 @@ class Dispatcher
     {
         $html = '';
         switch($this->action) {
-            case 'home':
-                //TODO
+            case 'produit':
+                $act = new DisplayProduits();
+                $html = $act->execute();
                 break;
             case 'catalogue':
                 $act = new DisplayCatalogue();
                 $html = $act->execute();
                 break;
-            case 'panier':
-                //TODO
-                break;
             case 'compte':
-                //TODO
+                $act = new DisplayCompte();
+                $act->execute();
                 break;
-            default:
+            case 'panier':
                 break;
+
         }
         $this->renderPage($html);
     }
@@ -54,15 +58,22 @@ class Dispatcher
 <body>
 
     <header>
-        <a href='?'>Accueil</a>
-        <a href='?action=catalogue'>Catalogue</a>
-        <a href='?'>Mon Panier</a>
-        <a href='?'>Mon Compte</a>
+    <nav>
+    <a href='?'><img src='images/logolong.jpg' alt='logo'></a>
+      <ul>
+        
+        <li><a href='?'>Accueil</a></li>
+        <li><a href='?action=catalogue'>Catalogue</a></li>
+        <li><a href='?'>Mon Panier</a></li>
+        <li><a href='?action=compte'>Mon Compte</a> </li>  
+        </ul> 
+    </nav>
 
     </header>
     
     $html   
 
+<img src='images/1.jpg' alt='image1'>
 
 
 </body>
