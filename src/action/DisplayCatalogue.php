@@ -11,4 +11,17 @@ class DisplayCatalogue extends Action
     {
         // TODO: Implement execute() method.
     }
+
+
+    public function display() : String
+    {
+        $html = "";
+
+        if (($db = ConnectionFactory::makeConnection()) != null) {
+            $quere = "SELECT nom, prix, description FROM produit";
+
+
+        }
+
+    }
 }
