@@ -35,6 +35,9 @@ class Dispatcher
             case 'compte':
                 //TODO
                 break;
+            case '':
+
+                break;
             default:
                 break;
         }
