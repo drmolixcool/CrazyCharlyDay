@@ -1,4 +1,4 @@
 .idea/
 dbconfig.ini
 /dbconfig.ini
-/vendor
+vendor/
