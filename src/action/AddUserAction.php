@@ -15,13 +15,13 @@ class AddUserAction
             $html = <<<EOF
                 <form id="form" method="post" action="?action=add-user" >
                     <label for="form_email">Email</label>
-                    <input type="email" id="form_email" name="email" placeholder="<email>" >
+                    <input type="email" id="form_email" name="email" placeholder="<email>" > <br>
                     <br><label for="form_mdp">Mot de passe</label>
-                    <input type="password" id="form_mdp" name="password" placeholder="<mot de passe>" >
+                    <input type="password" id="form_mdp" name="password" placeholder="<mot de passe>" > <br>
                     <br><label for="form_confirm">Confirmation du mot de passe</label>
-                    <input type="password" id="form_confirm" name="confirm" placeholder="<mot de passe>" >
+                    <input type="password" id="form_confirm" name="confirm" placeholder="<mot de passe>" > <br>
                     <br><button type="submit" >S'inscrire</button>
-                    <a href='index.php' >Retour</a>
+                    <a href='?action=compte' >Retour</a>
             </form>
             
             EOF;

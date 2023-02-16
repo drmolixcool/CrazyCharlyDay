@@ -17,6 +17,9 @@ class SigninAction extends Action
                     <label>Mot de passe : </label><input type='password' name='password' placeholder='mot de passe' > <br> <br>
                     <button type='submit' >Valider</button>
                 </form>
+                <br>
+                <a href='?action=inscription'>S'inscrire</a>
+                
                 </div>";
         }
         elseif ($this->httpMethod === "POST") {

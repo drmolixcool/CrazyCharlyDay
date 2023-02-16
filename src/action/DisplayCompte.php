@@ -14,6 +14,7 @@ class DisplayCompte extends Action
         if ($this->httpMethod = "GET"){
             $act = new SigninAction();
             $html = $act->execute();
+
         } elseif ($this->httpMethod = "POST") {
             $bd = ConnectionFactory::getConnection();
             $query = "SELECT * FROM Client";

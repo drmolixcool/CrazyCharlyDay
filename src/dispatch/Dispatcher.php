@@ -6,6 +6,7 @@ namespace App\dispatch;
 
 
 
+use App\action\AddUserAction;
 use App\action\DisplayCatalogue;
 use App\action\DisplayCompte;
 use App\action\DisplayProduits;
@@ -36,6 +37,10 @@ class Dispatcher
                 break;
             case 'compte':
                 $act = new DisplayCompte();
+                $html = $act->execute();
+                break;
+            case 'inscription':
+                $act = new AddUserAction();
                 $html = $act->execute();
                 break;
             case 'panier':
