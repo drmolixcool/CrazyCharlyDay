@@ -40,24 +40,9 @@ class AddUserAction
             if($_POST['password']===$_POST['confirm']){
 
                 $res = Auth::register(filter_var($_POST['email'],FILTER_SANITIZE_EMAIL),$_POST['password'],$_POST['nom'], $_POST['prenom'], $_POST['adresse'], $_POST['telephone'] );
-                if($res===true){
 
-                    $mail = filter_var($_POST['email']);
 
-                    $db = ConnectionFactory::getConnection();
-                    $query = "SELECT activation_token FROM user WHERE email=:mail";
-                    $stmt = $db->prepare($query);
-                    $stmt->bindParam("mail", $mail);
-                    $stmt->execute();
-                    $data = $stmt->fetch();
-
-                    $token = $data['activation_token'];
-
-                    $html = <<<EOF
-                    <script>document.location.href="?action=activate&token=$token"</script>
-                    EOF;
-
-                }else{
+                if ($res === false){
                     $html = "<div >
                             <p>Votre inscription a échoué, veuillez réessayer</p>
                             <a href='index.php' >Retour</a>
