@@ -17,7 +17,6 @@ class DisplayCatalogue extends Action
             $nbPage = $req->fetchColumn();
 
 
-
             $query = "SELECT id,nom,prix,lieu,img FROM produit";
 
             $req = $db->prepare($query);
