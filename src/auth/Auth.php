@@ -29,26 +29,39 @@ class Auth
         return null;
     }
 
-    public static function register(string $email, string $password): bool {
+    public static function register(string $email, string $password, string $nom, string $prenom, string $tel, string $adresse): bool {
         $bd = ConnectionFactory::getConnection();
-        $query = "select id from User where email = :email";
+        $query = "select idClient from User where email = :email";
         $get = $bd->prepare($query);
 
         if (filter_var($email, FILTER_SANITIZE_EMAIL)) {
-            $get->bindParam(':email', $email);
-            $get->execute();
-            if (!$get->fetch()) {
+            if (filter_var($nom,FILTER_SANITIZE_EMAIL )) {
+                if (filter_var($prenom, FILTER_SANITIZE_EMAIL)) {
+                    if (filter_var($tel, FILTER_SANITIZE_EMAIL)) {
+                        if (filter_var($adresse, FILTER_SANITIZE_EMAIL)) {
+                            $get->bindParam(':email', $email);
+                            $get->execute();
+                            if (!$get->fetch()) {
 
-                $newPass = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
-                $insert = "insert into User(email, passwd, idClient) 
-                           values(:email, :password, :idClient)";
-                $do = $bd->prepare($insert);
+                                $newPass = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+                                $insert = "insert into User(email, passwd, nom, prenom, adresse, tel) 
+                           values(:email, :password, :nom, :prenom, :adresse, :tel)";
+                                $do = $bd->prepare($insert);
 
-                $do->bindParam(':email', $email);
-                $do->bindParam(':password', $newPass);
-                $do->execute();
+                                $do->bindParam(':email', $email);
+                                $do->bindParam(':password', $newPass);
+                                $do->bindParam(':nom', $nom);
+                                $do->bindParam(':prenom', $prenom);
+                                $do->bindParam(':adresse', $adresse);
+                                $do->bindParam(':tel', $tel);
 
-                return true;
+                                $do->execute();
+
+                                return true;
+                            }
+                        }
+                    }
+                }
             }
         }
         return false;

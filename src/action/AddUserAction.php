@@ -20,6 +20,16 @@ class AddUserAction
                     <input type="password" id="form_mdp" name="password" placeholder="<mot de passe>" > <br>
                     <br><label for="form_confirm">Confirmation du mot de passe</label>
                     <input type="password" id="form_confirm" name="confirm" placeholder="<mot de passe>" > <br>
+                    
+                    <br><label>Nom</label>
+                    <input type="text" id="form_nom" name="nom" placeholder="nom" > <br>
+                    <br><label>Prenom</label>
+                    <input type="text" id="form_prenom" name="prenom" placeholder="prenom" > <br>
+                    <br><label>Adresse</label>
+                    <input type="text" id="form_adresse" name="adresse" placeholder="adresse" > <br>
+                    <br><label>Telephone</label>
+                    <input type="text" id="form_tel" name="telephone" placeholder="telephone" > <br>
+                    
                     <br><button type="submit" >S'inscrire</button>
                     <a href='?action=compte' >Retour</a>
             </form>
