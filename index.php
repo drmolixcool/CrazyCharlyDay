@@ -1,30 +1,12 @@
 <?php
 
-echo
- "<!DOCTYPE html>
-<html lang='fr'>
-<head>
-    <meta charset='UTF-8'>
-    <title>CrazyCharlyDay</title>
-</head>
-<body>
+use App\factory\ConnectionFactory;
+use App\dispatch\Dispatcher;
 
-    <header>
-        <a href=''>Accueil</a>
-        <a href=''>Catalogue</a>
-        <a href=''>Mon Panier</a>
-        <a href=''>Mon Compte</a>
+require_once 'vendor/autoload.php';
 
-    </header>
+session_start();
+ConnectionFactory::setConfig("dbconfig.ini");
 
-<img src='Images/1.jpg' alt='image1'>
-
-
-</body>
-
-<footer class='fixed bottom-0 h-10 bg-black text-center'>
-        <a href=''>Mentions légales</a>
-        <a href=''>Nous contacter</a>
-</footer>
-
-</html>" ;
+$dispatcher = new Dispatcher();
+$dispatcher->run();
