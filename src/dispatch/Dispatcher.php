@@ -7,6 +7,7 @@ namespace App\dispatch;
 
 
 use App\action\DisplayCatalogue;
+use App\action\DisplayCompte;
 use App\action\DisplayProduits;
 use App\action\SigninAction;
 
@@ -33,16 +34,13 @@ class Dispatcher
                 $act = new DisplayCatalogue();
                 $html = $act->execute();
                 break;
+            case 'compte':
+                $act = new DisplayCompte();
+                $act->execute();
+                break;
             case 'panier':
-                //TODO
                 break;
-            case 'signin':
-                $act = new SigninAction();
-                $html = $act->execute();
-                break;
-            case 'inscription':
-            default:
-                break;
+
         }
         $this->renderPage($html);
     }
@@ -67,7 +65,7 @@ class Dispatcher
         <li><a href='?'>Accueil</a></li>
         <li><a href='?action=catalogue'>Catalogue</a></li>
         <li><a href='?'>Mon Panier</a></li>
-        <li><a href='?'>Mon Compte</a> </li>  
+        <li><a href='?action=compte'>Mon Compte</a> </li>  
         </ul> 
     </nav>
 
