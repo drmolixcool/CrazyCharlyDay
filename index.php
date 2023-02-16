@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+
+echo
+ "<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +17,7 @@
 
     </header>
 
-
+<img src="Images/1.jpg" alt="image1">
 
     <footer>
         <a href="">Mentions légales</a>
@@ -22,4 +25,4 @@
     </footer>
 
 </body>
-</html>
+</html>" ;
