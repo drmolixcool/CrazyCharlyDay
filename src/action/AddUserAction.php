@@ -42,16 +42,9 @@ class AddUserAction
                 $res = Auth::register(filter_var($_POST['email'],FILTER_SANITIZE_EMAIL),$_POST['password'],$_POST['nom'], $_POST['prenom'], $_POST['adresse'], $_POST['telephone'] );
 
 
-                if ($res === false){
-                    $html = "<div >
-                            <p>Votre inscription a échoué, veuillez réessayer</p>
-                            <a href='index.php' >Retour</a>
-                            </div>";
-                }
-            }else{
                 $html = "<div >
-                         <p >Vos deux mots de passe ne correspondent pas, veuillez réessayer</p>
-                         <a href='index.php'>Retour</a>
+                         <p >Inscription réussie</p>
+                         <a href='index.php'>Accueil</a>
                          </div>";
             }
         }
