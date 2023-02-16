@@ -2,15 +2,15 @@
 
 namespace App\auth;
 
-use App\ConnectionFactory;
+use App\factory\ConnectionFactory;
 
 class Auth
 {
 
     public static function authenticate(string $email, string $password): ?User {
-        $pdo = ConnectionFactory::makeConnection();
+        $pdo = ConnectionFactory::getConnection();
         if (!filter_var($email, FILTER_SANITIZE_EMAIL)) return null;
-        $getPass = "select passwd, role , active from user where email = :email";
+        $getPass = "select passwd, role , active from User where email = :email";
         $req = $pdo->prepare($getPass);
         $req->bindParam(':email', $email);
         $req->execute();
@@ -20,18 +20,18 @@ class Auth
             $role = $data['role'];
             $actif = $data['active'];
             if (password_verify($password, $bdHash) && $actif == 1){
-                $user = new User($email, $bdHash, $role);
-                $user->setId();
-                $_SESSION['user'] = serialize($user);
-                return $user;
+                $User = new User($email, $bdHash, $role);
+                $User->setId();
+                $_SESSION['User'] = serialize($User);
+                return $User;
             }
         }
         return null;
     }
 
     public static function register(string $email, string $password): bool {
-        $bd = ConnectionFactory::makeConnection();
-        $query = "select id from user where email = :email";
+        $bd = ConnectionFactory::getConnection();
+        $query = "select id from User where email = :email";
         $get = $bd->prepare($query);
 
         if (filter_var($email, FILTER_SANITIZE_EMAIL)) {
@@ -40,13 +40,12 @@ class Auth
             if (!$get->fetch()) {
 
                 $newPass = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
-                $insert = "insert into user(email, passwd) 
-                           values(:email, :password)";
+                $insert = "insert into User(email, passwd, idClient) 
+                           values(:email, :password, :idClient)";
                 $do = $bd->prepare($insert);
 
                 $do->bindParam(':email', $email);
                 $do->bindParam(':password', $newPass);
-
                 $do->execute();
 
                 return true;

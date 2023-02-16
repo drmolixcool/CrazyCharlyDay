@@ -2,8 +2,8 @@
 
 namespace App\action;
 
-use App\ConnectionFactory;
-use App\Auth;
+use App\factory\ConnectionFactory;
+use App\auth\Auth;
 
 class AddUserAction
 {
