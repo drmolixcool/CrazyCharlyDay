@@ -53,16 +53,16 @@ class Dispatcher
 <body>
 
     <header>
-        <a href=''>Accueil</a>
+        <a href='?'>Accueil</a>
         <a href='?action=catalogue'>Catalogue</a>
-        <a href=''>Mon Panier</a>
-        <a href=''>Mon Compte</a>
+        <a href='?'>Mon Panier</a>
+        <a href='?'>Mon Compte</a>
 
     </header>
     
     $html   
 
-<img src='Images/1.jpg' alt='image1'>
+<img src='images/1.jpg' alt='image1'>
 
 
 </body>

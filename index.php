@@ -7,7 +7,7 @@ session_start();
 
 require_once 'vendor/autoload.php';
 
-ConnectionFactory::setConfig('dbconfig.ini');
+ConnectionFactory::setConfig();
 
 $action = $_GET['action'] ?? '';
 
