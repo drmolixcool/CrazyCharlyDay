@@ -2,6 +2,8 @@
 
 namespace App\factory;
 
+use PDO;
+
 class ConnectionFactory
 {
     public static array $config = [];
@@ -26,6 +28,8 @@ class ConnectionFactory
 
                 self::$context->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$context->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+                self::$context->
 
                 return self::$context;
             } catch (PDOException $e) {
