@@ -47,6 +47,7 @@ class Dispatcher
         "<!DOCTYPE html>
 <html lang='fr'>
 <head>
+    <link rel='stylesheet' href='style.css' >
     <meta charset='UTF-8'>
     <title>CrazyCharlyDay</title>
 </head>
