@@ -4,12 +4,12 @@ namespace App\action;
 
 use App\Auth;
 
-class SigninAction
+class SigninAction extends Action
 {
 
     public function execute() : string {
         $html = "";
-        if($this->http_method === "GET") {
+        if($this->httpMethod === "GET") {
             $html = "
                 <div class='text-center'>
                 <form method='post'>
@@ -20,7 +20,7 @@ class SigninAction
                 <br><a href='index.php' >Accueil</a>
                 </div>";
         }
-        elseif ($this->http_method === "POST") {
+        elseif ($this->httpMethod === "POST") {
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $passwd = $_POST['password'];
             $user = Auth::authenticate($email, $passwd);
