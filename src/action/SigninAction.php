@@ -2,7 +2,7 @@
 
 namespace App\action;
 
-use App\Auth;
+use App\auth\Auth;
 
 class SigninAction extends Action
 {

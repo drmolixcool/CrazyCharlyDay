@@ -2,7 +2,7 @@
 
 namespace App\user;
 
-use App\ConnectionFactory;
+use App\factory\ConnectionFactory;
 
 class User
 {
@@ -25,8 +25,8 @@ class User
     }
 
     public function setId() : bool {
-        if (($db = ConnectionFactory::makeConnection()) != null){
-            $query = $db->prepare("select id from user where email = :email");
+        if (($db = ConnectionFactory::getConnection()) != null){
+            $query = $db->prepare("select idClient from User where email = :email");
             $query->bindParam(':email', $this->email);
             $query->execute();
 

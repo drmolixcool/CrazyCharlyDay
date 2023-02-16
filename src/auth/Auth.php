@@ -3,6 +3,7 @@
 namespace App\auth;
 
 use App\factory\ConnectionFactory;
+use App\user\User;
 
 class Auth
 {
@@ -10,7 +11,7 @@ class Auth
     public static function authenticate(string $email, string $password): ?User {
         $pdo = ConnectionFactory::getConnection();
         if (!filter_var($email, FILTER_SANITIZE_EMAIL)) return null;
-        $getPass = "select passwd, role , active from User where email = :email";
+        $getPass = "select passwd, role from User where email = :email";
         $req = $pdo->prepare($getPass);
         $req->bindParam(':email', $email);
         $req->execute();
@@ -18,8 +19,7 @@ class Auth
         while ($data = $req->fetch()) {
             $bdHash = $data['passwd'];
             $role = $data['role'];
-            $actif = $data['active'];
-            if (password_verify($password, $bdHash) && $actif == 1){
+            if (password_verify($password, $bdHash) == 1){
                 $User = new User($email, $bdHash, $role);
                 $User->setId();
                 $_SESSION['User'] = serialize($User);
